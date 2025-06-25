@@ -84,18 +84,18 @@ function validation_inscription()
     //on vérifie si les champs sont bien remplis
     if(!empty($_POST['user_email']) && !empty($_POST['user_mdp']) && !empty($_POST['user_mdp2']) && !empty($_POST['user_prenom']) && !empty($_POST['user_nom']) && !empty($_POST['user_tel']))
     {   
-        $nom = preg_match('/[^a-zA-Z0-9]/', $_POST['user_nom']);
-        $prenom = preg_match('/[^a-zA-Z0-9]/', $_POST['user_prenom']);
-        $mdp = preg_match('/[^a-zA-Z0-9]/', $_POST['user_mdp']);
-        $mdp2 = preg_match('/[^a-zA-Z0-9]/', $_POST['user_mdp2']);
+        /* $nom = strip_tags($_POST['user_nom']);
+        $prenom = strip_tags($_POST['user_prenom']);
+        $mdp = strip_tags($_POST['user_mdp']);
+        $mdp2 = strip_tags($_POST['user_mdp2']); */
 
         /* var_dump($nom, $prenom, $mdp, $mdp2, strip_tags($_POST['user_nom']), strip_tags($_POST['user_prenom']));
         die(); */
 
-        $contient_lettres = preg_match('/[a-zA-Z]/', $_POST['user_tel']);
-        $contient_chiffres = preg_match('/[0-9]/', $_POST['user_tel']);
+        /* $contient_lettres = preg_match('/[a-zA-Z]/', $_POST['user_tel']);
+        $contient_chiffres = preg_match('/[0-9]/', $_POST['user_tel']); */
 
-        if($nom == 1 || $prenom == 1 || $mdp == 1 || $mdp2 == 1){
+        /* if($nom == $_POST['user_nom'] || $prenom == $_POST['user_prenom'] || $mdp == $_POST['user_mdp'] || $mdp2 == $_POST['user_mdp2']){
             header('Location: /inscription?error=invalid_characters');
         }elseif ($contient_lettres && $contient_chiffres) {
             header('Location: /inscription?error=invalid_characters');
@@ -103,12 +103,9 @@ function validation_inscription()
             header('Location: /inscription?error=invalid_characters');
         } /* elseif ($contient_chiffres) {
                 return "La chaîne contient uniquement des chiffres."; } */
-        else {
+        /*else {
             header('Location: /inscription?error=invalid_characters');
-        }
-
-        /* var_dump($nom, strip_tags($_POST['user_nom']));
-        die(); */
+        } */
         //on vérifie si les deux mots de passe sont identiques
         if($_POST['user_mdp']==$_POST['user_mdp2'])
         {
