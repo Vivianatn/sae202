@@ -92,10 +92,29 @@ grant all on sae202Base.* TO 'sae202User'@'localhost';
 
 Et normalement tout est bon dans votre admisql : MMI.mmi-troyes.fr/adminsql
 
-Normalement dans le dossier data dans sae202 il y a un fichier sae202Base.sql. Pour importer toutes les tables nécessaires vous pouvez soit mettre le fichier dans importer de adminsql soit vous faites la commande suivante : mysqldump sae202Base < sae202Base.sql
+Normalement dans le dossier data dans sae202 il y a un fichier sae202Base.sql. Pour importer toutes les tables nécessaires, allez à MMI.mmi-troyes.fr/adminsql et aller dans l'onglet SQL de la base sae202Base. Ouvrez le fichier sae202Base.sql depuis Filezilla en faisant clique droit, afficher/éditer, et copier coller tout dans sql. Executez. La base c'est bon.
 
 Et les bases de données sont prêtes.
 
+Retournez dans Filezilla, dans le dossier /var/www/sae202/conf Cliquez droit sur le conf.inc.php et Afficher/éditer. Modifiez le MDP et mettez votre MDP de mysql.
+
+## Wordpress début
+Allez télécharger les fichier à cette adresse: https://drive.google.com/file/d/1eA-SM1uUlugzngEI6OaC5yJEmiOeiXJd/view?usp=drive_link
+Ensuite décompressez et foutez les deux contenus (zip à ne pas toucher) dans /var/www/agence que vous allez créer exprès.
+Ensuite faites un petit cd /var/www puis un (sudo) chown -R MMI:www-data agence puis (sudo) chmod -R 775 agence
+
+Maintenant on va s'amuser avec les bases: 
+
+```(sudo) mysql
+create database agence;
+grant all on agence.* TO 'sae202User'@'localhost';
+```
+
+## Wordpress suite
+Maintenant, allez sur votre site MMI.sae202.ovh/agence/installer.php suivez le processus et changez juste le nom de la base, le User(sae202User) et Le mdp qu'est celui de votre sql.
+
+Voila, wordpress installé, maintenant allez à MMI.sae202.ovh/agence/wp-admin mettez vos id et allez dans Extensions à gauche. Cherchez Jetpack et activez le.
+Maintenant fin de journée.
 ## Finalisation et certification ssl (mettre en https)
 
 Ensuite, tapez la commande certbot et un menu s'affichera. Tapez le numéro qui correspondra à l'URL  de votre site donc un truc comme MMI.sae202.ovh et taper sur entrée. Et normalement la certification est faite et si ça ne le fait pas faites vous un partage de connexion avec votre PC et recommencer l'opération.
